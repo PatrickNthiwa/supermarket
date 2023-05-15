@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Manager;
+use App\Models\Employee;
 use App\Models\Supermarket;
 use Illuminate\Http\Request;
 use App\Http\Requests\ManagersFormRequest;
@@ -82,5 +83,22 @@ class ManagersController extends Controller
     {
         $managers = Manager::find($id)->delete();
         return redirect('managers')->with('message','Manager deleted successfully');
+    }
+
+
+
+    public function addEmployees(Request $request, Manager $manager)
+    {
+        $employeeNames = $request->input('employee_names');
+
+        // Create employees and associate them with the manager
+        foreach ($employeeNames as $name) {
+            $employee = new Employee();
+            $employee->name = $name;
+            $employee->manager()->associate($manager);
+            $employee->save();
+        }
+
+        return back()->withSuccess('Employees added successfully.');
     }
 }

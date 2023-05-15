@@ -17,31 +17,22 @@
      
             <div class="py-4 px-4 bg-white overflow-hidden shadow-sm sm:rounded-lg">
             <form action="{{ route('managers.store') }}" method="POST">
-    @csrf
-    <div class="form-group">
-        <label for="name">Manager Name</label>
-        <input type="text" name="name" id="name" class="form-control" required>
-    </div>
-    <div class="form-group">
-        <label for="name">Manager Phone</label>
-        <input type="text" name="phone" id="phone" class="form-control" required>
-    </div>
-    <div class="form-group">
-        <label for="name">Manager Email</label>
-        <input type="text" name="email" id="email" class="form-control" required>
-    </div>
-    <br>
-    <!-- <div class="form-group">
-        <label for="supermarket_id">Supermarket</label>
-        <select name="supermarket_id" id="supermarket_id" class="form-control" >
-            <option value="">Select Supermarket</option>
-            @foreach ($supermarkets as $supermarket)
-                <option value="{{ $supermarket->id }}">{{ $supermarket->name }}</option>
-            @endforeach
-        </select>
-    </div> -->
-    <button type="submit" class="btn btn-primary">Create Manager</button>
-</form>
+                @csrf
+                <div class="form-group">
+                    <label for="name">Manager Name</label>
+                    <input type="text" name="name" id="name" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="name">Manager Phone</label>
+                    <input type="text" name="phone" id="phone" class="form-control" required>
+                </div>
+                <div class="form-group">
+                        <label for="name">Manager Email</label>
+                        <input type="text" name="email" id="email" class="form-control" required>
+                    </div>
+                <br>
+                    <button type="submit" class="btn btn-primary">Create Manager</button>
+                </form>
 
             </div>
         </div>

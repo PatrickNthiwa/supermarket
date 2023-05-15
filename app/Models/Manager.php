@@ -19,4 +19,8 @@ class Manager extends Model
     {
         return $this->hasMany(Supermarket::class);
     }
+
+    public function employees(){
+        return $this->hasMany(Employee::class);
+    }
 }

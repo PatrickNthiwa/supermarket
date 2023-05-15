@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('List Managers') }}
+            {{ __('List Employees') }}
         </h2>
     </x-slot>
 
@@ -19,28 +19,28 @@
                         <tr>
                             <td>ID</td>
                             <td>Name</td>
-                            <td>Email</td>
-                            <td>Phone</td>
-                            <!-- <td>Supermarket</td> -->
+                            <td>Type</td>
+                            <td>Gender</td>
+                          
                             <td>Edit</td>
                             <td>Delete</td>
                         </tr>
                     </thead>
                     <tbody>
-                    @forelse ($managers as $manager)
+                    @forelse ($employees as $employee)
                         <tr>
-                            <td>{{$manager->id}}</td>
-                            <td>{{$manager->name}}</td>
-                            <td>{{$manager->email}}</td>
-                            <td>{{$manager->phone}}</td>
+                            <td>{{$employee->id}}</td>
+                            <td>{{$employee->name}}</td>
+                            <td>{{$employee->type}}</td>
+                            <td>{{$employee->gender}}</td>
                           
 
                             <td>
-                            <a href="{{ route('managers.edit', $manager->id) }}" class="btn btn-primary">Edit</a>
+                            <a href="{{ route('employees.edit', $employee->id) }}" class="btn btn-primary">Edit</a>
 
                             </td>
                             <td>
-                                <form action="{{ route('managers.destroy', $manager) }}" method="POST">
+                                <form action="{{ route('employees.destroy', $employee) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger">Delete</button>

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ManagersController;
 use App\Http\Controllers\SupermarketController;
 
@@ -59,4 +60,21 @@ Route::prefix('managers')->group(function(){
         Route::get('/{id}/edit', [ManagersController::class, 'edit'])->name('managers.edit');
         Route::put('/{id}', [ManagersController::class, 'update'])->name('managers.update');
         Route::delete('/{id}', [ManagersController::class, 'destroy'])->name('managers.destroy');
+
+
+
+    
+});
+
+Route::prefix('employees')->group(function(){
+     Route::get('/',[EmployeeController::class,'index'])->name('employees.index');
+    Route::get('/add',[EmployeeController::class,'create'])->name('employees.create');
+    Route::post('/add', [EmployeeController::class, 'store'])->name('employees.store');
+    Route::get('/{id}/edit', [EmployeeController::class, 'edit'])->name('employees.edit');
+    Route::delete('/{id}', [EmployeeController::class, 'destroy'])->name('employees.destroy');
+    Route::get('/assign_manager', [EmployeeController::class, 'assignManager'])->name('employees.assignManager');
+    Route::put('/update_manager', [EmployeeController::class, 'updateManager'])->name('employees.updateManager');
+   
+    // Route::get();
+    
 });
