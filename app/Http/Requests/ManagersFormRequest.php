@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class SupermarketFormRequest extends FormRequest
+class ManagersFormRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,14 +26,15 @@ class SupermarketFormRequest extends FormRequest
                 'required',
                 'max:255'
             ],
-            'location'=>[
+            'phone'=>[
                 'required',
                 'max:255'
-            ]     ,
-            'manager_id'=>[
+            ],
+            'email'=>[
                 'required',
-                'max:255'
-            ]      
+                'max:255',
+                'nullable'
+            ]
         ];
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Manager;
 use App\Models\Supermarket;
 use Illuminate\Http\Request;
 use App\Http\Requests\SupermarketFormRequest;
@@ -11,13 +12,7 @@ class SupermarketController extends Controller
     /**
      * Display a listing of the resource.
      */
-    // public function index()
-    // {
-
-    //     $supermarkets= Supermarket::all();
-    //     return view('supermarkets.index',compact('supermarkets'));
-    // }
-
+ 
     public function index(Request $request)
     {
         try {
@@ -45,7 +40,10 @@ class SupermarketController extends Controller
      */
     public function create()
     {
-        return view('supermarkets.create');
+
+        $managers =Manager::all();
+
+        return view('supermarkets.create',compact('managers'));
     }
 
     /**
@@ -55,9 +53,17 @@ class SupermarketController extends Controller
     {
         $data= $request->validated();
 
-        $supermarket=Supermarket::create($data);
+        $supermarket = new Supermarket();
+        $supermarket->name = $request->name;
+        $supermarket->location = $request->location;
+        $supermarket->manager_id = $request->manager_id;
+        $supermarket->save();
+    
+        return redirect()->route('supermarkets.index')
+            ->with('message', 'Supermarket created successfully.');
+        // $supermarket=Supermarket::create($data);
 
-        return redirect('supermarkets')->with('message','Supermarket Added successfully');
+        // return redirect('supermarkets')->with('message','Supermarket Added successfully');
     }
 
     /**
@@ -74,9 +80,11 @@ class SupermarketController extends Controller
     public function edit($id)
     {
         $supermarket = Supermarket::findOrFail($id);
-        return view('supermarkets.edit', compact('supermarket'));
+        $managers = Manager::all(); 
+
+        return view('supermarkets.edit', compact('supermarket', 'managers'));
     }
-    
+
 
     /**
      * Update the specified resource in storage.
@@ -88,6 +96,7 @@ class SupermarketController extends Controller
         $supermarket = Supermarket::where('id',$id)->update([
             'name'=>$data['name'],
             'location'=> $data['location'],
+            'manager_id'=>$data['manager_id']
         ]);
 
         return redirect('supermarkets')->with('message','Supermarket updated sucessfully');
@@ -96,12 +105,12 @@ class SupermarketController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Request $request,$id)
+    public function destroy($id)
     {
 
         try {
          
-            $supermarket = Supermarket::find($id)->delete();
+            $supermarket = Supermarket::findOrFail($id)->delete();
     
             $view = $request->input('view', 'grid');
     

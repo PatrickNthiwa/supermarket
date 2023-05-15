@@ -26,8 +26,9 @@
                         @forelse ($supermarkets as $supermarket)
                             <!-- ... grid view item ... -->
                     <div class="p-4">
-                        <h3 class="text-lg font-medium">{{ $supermarket->name }}</h3>
-                        <p class="text-gray-500">{{ $supermarket->location }}</p>
+                        <h3 class="text-lg font-medium">Name :{{ $supermarket->name }}</h3>
+                        <p class="text-gray-500">Location : {{ $supermarket->location }}</p>
+                        <p class="text-gray-500">Manager :{{$supermarket->manager->name}}</p>
                         <!-- ... other supermarket details ... -->
                         <div class="mt-4">
                         <a href="{{ route('supermarkets.edit', $supermarket->id) }}" class="btn btn-primary">Edit</a>
@@ -53,6 +54,7 @@
                                 <th>ID</th>
                                 <th>Name</th>
                                 <th>Location</th>
+                                <th>Manager</th>
                                 <th>Edit</th>
                                 <th>Delete</th>
                             </tr>
@@ -63,6 +65,7 @@
                                     <td>{{ $supermarket->id }}</td>
                                     <td>{{ $supermarket->name }}</td>
                                     <td>{{ $supermarket->location }}</td>
+                                    <td>{{$supermarket->manager->name}}</td>
                                     <td>
                                         <a href="{{ route('supermarkets/'. $supermarket->id.'/edit') }}" class="btn btn-primary">Edit</a>
                                     </td>

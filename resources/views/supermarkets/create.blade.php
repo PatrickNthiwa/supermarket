@@ -1,37 +1,41 @@
 <x-app-layout>
-<x-slot name="header">
-
-
+    <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Add Supermarket') }}
+            {{ __('Create Supermarket') }}
         </h2>
     </x-slot>
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-        <div>
-               <!-- Message Status -->
-        <x-success-status class="mb-4" :status="session('message')" />
-
-        </div>
-     
-            <div class="py-4 px-4 bg-white overflow-hidden shadow-sm sm:rounded-lg">
-               <form action="{{url('supermarkets/add')}}" method="POST">
-                @csrf
-                <div>
-                    <x-input-label for="name" :value="__('Supermarket Name')" />
-                    <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" autofocus />
-                    <x-validation-errors :messages="$errors->get('name')" class="mt-2" />
-               </div>
-               <div>
-                    <x-input-label for="location" :value="__('Supermarket Location')" />
-                    <x-text-input id="location" class="block mt-1 w-full" type="text" name="location" :value="old('location')" autofocus />
-                    <x-validation-errors :messages="$errors->get('location')" class="mt-2" />
-               </div>
-                <div>
-                        <x-primary-button class="ml-3">{{ __('Save Super') }} </x-primary-button>
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 bg-white border-b border-gray-200">
+                    <form action="{{ route('supermarkets.store') }}" method="POST">
+                        @csrf
+                        <div class="mb-4">
+                            <label for="name" class="block font-medium text-gray-700">Name</label>
+                            <input type="text" name="name" id="name" class="form-input rounded-md shadow-sm">
+                        </div>
+                        <div class="mb-4">
+                            <label for="location" class="block font-medium text-gray-700">Location</label>
+                            <input type="text" name="location" id="location" class="form-input rounded-md shadow-sm">
+                        </div>
+                        <div class="mb-4">
+                            <label for="manager_id" class="block font-medium text-gray-700">Manager</label>
+                            <select name="manager_id" id="manager_id" class="form-select rounded-md shadow-sm">
+                                <option value="">Select Manager</option>
+                                @foreach ($managers as $manager)
+                                    <option value="{{ $manager->id }}">{{ $manager->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <button type="submit" class="inline-flex items-center px-4 py-2 bg-blue-500 border border-transparent rounded-md font-semibold text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                                Create
+                            </button>
+                        </div>
+                    </form>
                 </div>
-               </form>
             </div>
         </div>
     </div>

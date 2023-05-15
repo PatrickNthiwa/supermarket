@@ -5,18 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Supermarket extends Model
+class Manager extends Model
 {
     use HasFactory;
 
-    protected $table ="supermarkets";
-
     protected $fillable =[
         'name',
-        'location'
+        'phone',
+
     ];
 
-    public function manager(){
-        return $this->belongsTo(Manager::class);
+    public function supermarkets()
+    {
+        return $this->hasMany(Supermarket::class);
     }
 }

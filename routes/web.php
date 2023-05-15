@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ManagersController;
 use App\Http\Controllers\SupermarketController;
 
 /*
@@ -48,4 +49,14 @@ Route::prefix('supermarkets')->group(function () {
     Route::get('/{id}/edit', [SupermarketController::class, 'edit'])->name('supermarkets.edit');
     Route::put('/{id}', [SupermarketController::class, 'update'])->name('supermarkets.update');
     Route::delete('/{id}', [SupermarketController::class, 'destroy'])->name('supermarkets.destroy');
+});
+
+
+Route::prefix('managers')->group(function(){
+        Route::get('/',[ManagersController::class,'index'])->name('managers.index');
+        Route::get('/add',[ManagersController::class,'create'])->name('managers.create');
+        Route::post('/add', [ManagersController::class, 'store'])->name('managers.store');
+        Route::get('/{id}/edit', [ManagersController::class, 'edit'])->name('managers.edit');
+        Route::put('/{id}', [ManagersController::class, 'update'])->name('managers.update');
+        Route::delete('/{id}', [ManagersController::class, 'destroy'])->name('managers.destroy');
 });
